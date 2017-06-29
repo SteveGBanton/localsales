@@ -22,7 +22,6 @@ import { autoSubscriber } from 'firebase-nest'
 
 const items = [
 
-
 ]
 
 class SearchByDeal extends Component {
@@ -36,7 +35,7 @@ class SearchByDeal extends Component {
 
 //for autoSubscriber
   static getSubs(props, state) {
-    return props.navigation.state.params.state.store.deals.subs() //gives firebase nest our stores sub object
+    return props.navigation.state.params.state.store.deals.subs() //gives firebase nest our store's sub object
   }
 
   subscribeSubs(subs, props, state) {

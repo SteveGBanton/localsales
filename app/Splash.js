@@ -94,29 +94,3 @@ export default class Splash extends Component {
     )
   }
 }
-
-
-
-
-// Old Splash Items.
-// setTimeout(() => {
-//   this.props.navigation.dispatch(resetAction)
-// }, 1000)
-
-//
-// <View style={{flex: 1, justifyContent: 'center',
-// alignItems: 'center'}}>
-//   <Image style={{flex: 1}} source={picImg} />
-// </View>
-
-// <Container theme={theme}>
-//   <View>
-//     <Content scrollEnabled={false}>
-//       <Image source={stores.settings.LoginBG}>
-//         <View>
-//           <Login {...this.props}/>
-//         </View>
-//       </Image>
-//     </Content>
-//   </View>
-// </Container>
