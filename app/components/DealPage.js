@@ -18,9 +18,9 @@ class DealPage extends Component {
     const { params } = this.props.navigation.state
 
     const image = {
-      uri: params.photo
+      uri: params.photoURL
     }
-    console.log(params)
+    console.log(params.photoURL)
 
     return (
       <Container>
@@ -42,7 +42,7 @@ class DealPage extends Component {
                 <Left>
                     <Thumbnail source={image}/>
                     <Body>
-                        <Text>{params.title}</Text>
+                        <Text>{params.productName}</Text>
                         <Text note>{params.description}</Text>
                     </Body>
                 </Left>

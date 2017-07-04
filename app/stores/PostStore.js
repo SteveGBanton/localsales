@@ -8,6 +8,20 @@ const Blob = RNFetchBlob.polyfill.Blob // RN has no built in support for blobs, 
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
 window.Blob = Blob
 
+const Fetch = RNFetchBlob.polyfill.Fetch
+// replace built-in fetch
+window.fetch = new Fetch({
+    // handle response data conversion automatically
+    auto : true,
+    // match Content-Type header with strings in this array
+    binaryContentTypes : [
+        'image/',
+        'video/',
+        'audio/',
+        'foo/',
+    ]
+}).build()
+
 const postBase = 'posts'
 
 export default class PostStore extends MobxFirebaseStore {
@@ -30,7 +44,8 @@ export default class PostStore extends MobxFirebaseStore {
   //method takes a text and url and creates a post object out of it and send to database.
   @action
   add(data, url) {
-    console.log("starting update to DB")
+    console.log('add to DB')
+    console.log(data)
     let post = {
       currentVote: 0,
       upvotes: 0,
@@ -57,21 +72,19 @@ export default class PostStore extends MobxFirebaseStore {
     updates['/' + postBase + '/' + key] = post
     updates['/' + this.user.uid + '/history/' + key] = true
     this.fb.update(updates) //actually makes the updates.
-    console.log("possibly updated to DB")
   }
 
   @action
   postImage(img, cb) {
     const filePath = img.uri.substring(7)
     let uri = RNFetchBlob.wrap(filePath)
-    console.log(img)
     Blob.build(uri).then((blob) => {
-        console.log('blob built. now add to storage.')
+
         firebase.storage().ref().child(this.user.uid)
           .child(uuidv4())
           .put(blob)
             .then((snap) => {
-              console.log('now added to storage.')
+
               cb(snap)
               blob.close()
             })

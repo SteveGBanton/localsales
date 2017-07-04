@@ -61,6 +61,7 @@ class SearchByDeal extends Component {
     const list = postList ? postList.entries().map((val)=>{
       return val[1]
     }) : null
+    console.log("LIST:")
     console.log(list)
     const { fetching } = this.state
 
@@ -85,18 +86,18 @@ class SearchByDeal extends Component {
             renderRow={(data) =>
               <ListItem onPress={() => {
                 navigate('DealPage', {
-                  title: data.title,
+                  productName: data.productName,
                   user: data.user,
                   description: data.description,
                   location: data.location,
-                  photo: data.photo,
+                  photoURL: data.photoURL,
                   tags: data.tags,
                   currentVote: data.currentVote,
                   state: {...params.state}
                 })
 
               }}>
-                <Text>{data.title}</Text>
+                <Text>{data.productName}</Text>
               </ListItem>
             }>
           </List>
